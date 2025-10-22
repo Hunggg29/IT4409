@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Cà phê Arabica Đà Lạt",
+    "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyGIP6JMY1PPI9NYY510o4wliJIzv_OXKftQ&s",
+    "desc": "Hạt Arabica hảo hạng được trồng tại Đà Lạt – vị chua thanh, hương thơm nhẹ nhàng và hậu vị ngọt.",
+    "price": "145.000"
+  },
+  {
+    "name": "Cà phê Robusta Buôn Ma Thuột",
+    "img": "https://coffeetree.vn/wp-content/uploads/2020/11/hinh-website-ca-phe-robusta-buon-me-thuot.png",
+    "desc": "Đậm đà, mạnh mẽ – dành cho người yêu cà phê vị truyền thống Việt Nam.",
+    "price": "110.000"
+  },
+  {
+    "name": "Cà phê Cold Brew Mocha House",
+    "img": "https://thecoffeehouse.com.vn/wp-content/uploads/2019/05/cold-brew-thuc-uong-hot-nhat-mua-he-nay-tai-napoli-coffee.jpg",
+    "desc": "Cold Brew ủ lạnh 12 tiếng – vị êm dịu, hậu ngọt tự nhiên, phù hợp cho ngày hè.",
+    "price": "95.000"
+  }
+]
