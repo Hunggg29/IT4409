@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 
 export default function ResultTable({ keyword, user, onAdded }) {
   // state cục bộ của component
-  const [users, setUsers] = useState([]);        // Danh sách người dùng hiển thị trên bảng
-  const [editing, setEditing] = useState(null);  // Người dùng đang được chỉnh sửa (null nếu không sửa)
-  const [loading, setLoading] = useState(true);  // Trạng thái tải dữ liệu ban đầu
+  const [users, setUsers] = useState([]);        
+  const [editing, setEditing] = useState(null);  
+  const [loading, setLoading] = useState(true);
 
-  // gọi API lấy dữ liệu khi component mount (chạy 1 lần do deps rỗng [])
+  // gọi API lấy dữ liệu khi component mount
   useEffect(() => {
     fetch("https://jsonplaceholder.typicode.com/users")
       .then((res) => res.json())
