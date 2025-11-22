@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import axios from 'axios'
 import './App.css'
 
 const API_URL = 'https://jsonplaceholder.typicode.com/users'
@@ -38,13 +39,9 @@ function App() {
     setLoading(true)
     setError(null)
     try {
-      const response = await fetch(API_URL)
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`)
-      }
-      const data = await response.json()
-      setUsers(data)
-      setFilteredUsers(data)
+      const response = await axios.get(API_URL)
+      setUsers(response.data)
+      setFilteredUsers(response.data)
     } catch (err) {
       setError('Failed to fetch users: ' + err.message)
       console.error('Error fetching users:', err)
@@ -58,18 +55,8 @@ function App() {
     setLoading(true)
     setError(null)
     try {
-      const response = await fetch(API_URL, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(userData)
-      })
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`)
-      }
-      const newUser = await response.json()
-      setUsers([newUser, ...users])
+      const response = await axios.post(API_URL, userData)
+      setUsers([response.data, ...users])
       setShowModal(false)
       resetForm()
     } catch (err) {
@@ -85,12 +72,9 @@ function App() {
     setLoading(true)
     setError(null)
     try {
-      // Check if this is a newly created user (id 11 from JSONPlaceholder)
-      // For newly created users, only update UI without API call
+      // Update cho các user mới create
       const isNewUser = users.find(user => user.id === id && id === 11)
-      
       if (isNewUser) {
-        // Only update UI for newly created users
         setUsers(users.map(user => 
           user.id === id ? { ...user, ...userData, id: id } : user
         ))
@@ -101,18 +85,7 @@ function App() {
         return
       }
 
-      // For original users (id 1-10), call the API
-      const response = await fetch(`${API_URL}/${id}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(userData)
-      })
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`)
-      }
-      const updatedUser = await response.json()
+      const response = await axios.put(`${API_URL}/${id}`, userData)
       setUsers(users.map(user => 
         user.id === id ? { ...user, ...userData } : user
       ))
@@ -136,12 +109,7 @@ function App() {
     setLoading(true)
     setError(null)
     try {
-      const response = await fetch(`${API_URL}/${id}`, {
-        method: 'DELETE'
-      })
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`)
-      }
+      await axios.delete(`${API_URL}/${id}`)
       setUsers(users.filter(user => user.id !== id))
     } catch (err) {
       setError('Failed to delete user: ' + err.message)
